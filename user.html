@@ -24,20 +24,20 @@ body{
     max-width:480px;
     margin:auto;
 }
-.card{
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.15);
-    border-radius:22px;
-    padding:18px;
-    margin-bottom:15px;
-    backdrop-filter:blur(15px);
-    -webkit-backdrop-filter:blur(15px);
-    box-shadow:0 10px 35px rgba(0,0,0,.35);
+
+/* Game Icon Floating & Color Changing Effect */
+@keyframes floatAnimation {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
 }
-.header{
-    text-align:center;
-    padding:10px 0 15px;
+@keyframes colorCycle {
+    0% { background: linear-gradient(135deg,#00d9ff44,#7357ff55); border-color: #00d9ff; box-shadow: 0 5px 20px rgba(0,217,255,0.4); }
+    33% { background: linear-gradient(135deg,#ff475744,#ffa50255); border-color: #ff4757; box-shadow: 0 5px 20px rgba(255,71,87,0.4); }
+    66% { background: linear-gradient(135deg,#2ed57344,#1e90ff55); border-color: #2ed573; box-shadow: 0 5px 20px rgba(46,213,115,0.4); }
+    100% { background: linear-gradient(135deg,#00d9ff44,#7357ff55); border-color: #00d9ff; box-shadow: 0 5px 20px rgba(0,217,255,0.4); }
 }
+
 .logo{
     width:65px;
     height:65px;
@@ -47,13 +47,46 @@ body{
     align-items:center;
     justify-content:center;
     font-size:32px;
-    background:linear-gradient(135deg,#00d9ff44,#7357ff55);
-    border:1px solid #ffffff22;
+    border:2px solid;
+    animation: floatAnimation 3.5s ease-in-out infinite, colorCycle 9s linear infinite;
+}
+
+/* Professional Cards with Unique Highlights */
+.card{
+    border-radius:22px;
+    padding:18px;
+    margin-bottom:15px;
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+    box-shadow:0 10px 35px rgba(0,0,0,.35);
+}
+
+.card.clock-card {
+    border: 1px solid rgba(0, 217, 255, 0.4);
+    background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(15, 15, 30, 0.8));
+}
+.card.questions-card {
+    border: 1px solid rgba(115, 87, 255, 0.4);
+    background: linear-gradient(135deg, rgba(115, 87, 255, 0.1), rgba(15, 15, 30, 0.8));
+}
+.card.announcement-card {
+    border: 1px solid rgba(46, 213, 115, 0.4);
+    background: linear-gradient(135deg, rgba(46, 213, 115, 0.1), rgba(15, 15, 30, 0.8));
+}
+.card.button-card {
+    border: 1px solid rgba(255, 165, 2, 0.4);
+    background: linear-gradient(135deg, rgba(255, 165, 2, 0.1), rgba(15, 15, 30, 0.8));
+}
+
+.header{
+    text-align:center;
+    padding:10px 0 15px;
 }
 .header h1{
     margin:10px 0 5px;
     font-size:25px;
     color:#00d9ff;
+    text-shadow: 0 0 10px rgba(0,217,255,0.3);
 }
 .header p{
     margin:0;
@@ -127,23 +160,30 @@ body{
     border-radius:20px;
     font-size:10px;
 }
+
+/* Clear & Visible Question Boxes */
 .question{
     padding:15px;
-    margin:10px 0;
+    margin:12px 0;
     border-radius:15px;
-    background:#ffffff08;
-    border-left:4px solid #00d9ff;
+    background: rgba(20, 20, 40, 0.95);
+    border: 1px solid rgba(115, 87, 255, 0.3);
+    border-left: 4px solid #7357ff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 .question-number{
-    color:#00d9ff;
-    font-size:11px;
-    font-weight:bold;
-    display:block;
-    margin-bottom:6px;
+    color: #00d9ff;
+    font-size: 12px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
 }
 .question-text{
-    font-size:14px;
-    line-height:1.6;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #ffffff;
+    font-weight: 500;
 }
 .empty{
     text-align:center;
@@ -153,10 +193,11 @@ body{
 .announcement{
     padding:15px;
     border-radius:16px;
-    background:linear-gradient(135deg,#00d9ff12,#7357ff12);
-    border:1px solid #ffffff10;
+    background: rgba(20, 20, 40, 0.95);
+    border: 1px solid rgba(46, 213, 115, 0.3);
     line-height:1.7;
     font-size:14px;
+    color: #ffffff;
 }
 .announcement-icon{
     font-size:22px;
@@ -177,6 +218,8 @@ body{
     font-size:14px;
     background:linear-gradient(135deg,#008eb0,#5141a8);
     cursor:pointer;
+    box-shadow: 0 5px 15px rgba(0,142,176,0.3);
+    font-weight: bold;
 }
 .btn:active{
     transform:scale(.98);
@@ -247,7 +290,7 @@ body{
 
     <div id="errorBox" class="error"></div>
 
-    <div class="card clock">
+    <div class="card clock-card clock">
         <div class="clock-title">🇵🇰 PAKISTAN STANDARD TIME</div>
         <div id="clock">--:--:--</div>
         <div id="date">Loading date...</div>
@@ -261,7 +304,7 @@ body{
         </div>
     </div>
 
-    <div class="card">
+    <div class="card questions-card">
         <div class="title-row">
             <h2>📚 Today's Questions</h2>
             <span id="questionCount" class="badge">0/5</span>
@@ -271,10 +314,10 @@ body{
         </div>
     </div>
 
-    <div class="card">
+    <div class="card announcement-card">
         <div class="title-row">
             <h2>📢 Announcement</h2>
-            <span class="badge">LIVE</span>
+            <span class="badge" style="background:#2ed57318; color:#2ed573; border-color:#2ed57333;">LIVE</span>
         </div>
         <div id="announcement" class="announcement">
             <div class="announcement-icon">📢</div>
@@ -283,7 +326,7 @@ body{
         <div id="updateTime" class="update">Last Updated: —</div>
     </div>
 
-    <div class="card">
+    <div class="card button-card">
         <button class="btn" onclick="refreshPage()">🔄 Refresh Dashboard</button>
     </div>
 
@@ -310,7 +353,6 @@ try {
     showError("Firebase Start Error: " + error.message);
 }
 
-// Optimized Clock Formatter
 const timeFormatter = new Intl.DateTimeFormat("en-PK", { timeZone:"Asia/Karachi", hour:"2-digit", minute:"2-digit", second:"2-digit", hour12:true });
 const dateFormatter = new Intl.DateTimeFormat("en-PK", { timeZone:"Asia/Karachi", weekday:"long", day:"2-digit", month:"long", year:"numeric" });
 const yearFormatter = new Intl.DateTimeFormat("en-PK", { timeZone:"Asia/Karachi", year:"numeric" });
@@ -344,7 +386,58 @@ function escapeHTML(value){
     return div.innerHTML;
 }
 
-// Firebase Connection State
+// Render Questions Function
+function renderQuestions(data) {
+    const box = document.getElementById("questions");
+    let htmlContent = "";
+    let count = 0;
+
+    for(let i = 1; i <= 5; i++){
+        const val = data["q" + i];
+        if(val !== undefined && val !== null && String(val).trim() !== ""){
+            count++;
+        }
+        htmlContent += `
+            <div class="question">
+                <span class="question-number">SAWAL ${i}</span>
+                <div class="question-text">${val ? escapeHTML(val) : "---"}</div>
+            </div>
+        `;
+    }
+    box.innerHTML = htmlContent;
+    document.getElementById("questionCount").textContent = count + "/5";
+}
+
+// Render Announcement Function
+function renderAnnouncement(data) {
+    const announcement = document.getElementById("announcement");
+    const updateTime = document.getElementById("updateTime");
+
+    if(!data){
+        announcement.innerHTML = `<div class="announcement-icon">📢</div>abhi koi announcement nahi hai.`;
+        updateTime.textContent = "Last Updated: —";
+        return;
+    }
+
+    announcement.innerHTML = `<div class="announcement-icon">📢</div>${escapeHTML(data.text || "—")}`;
+    updateTime.textContent = data.time ? "🕒 Last Updated: " + escapeHTML(data.time) : "🕒 Last Updated: Just now";
+}
+
+// Pehle se save shuda offline data foran load kar do taake bina net ke bhi screen khaali na rahe
+const cachedQuestions = localStorage.getItem("cached_questions");
+if (cachedQuestions) {
+    try {
+        renderQuestions(JSON.parse(cachedQuestions));
+    } catch(e) {}
+}
+
+const cachedAnnouncement = localStorage.getItem("cached_announcement");
+if (cachedAnnouncement) {
+    try {
+        renderAnnouncement(JSON.parse(cachedAnnouncement));
+    } catch(e) {}
+}
+
 if(db){
     db.ref(".info/connected").on("value", snapshot => {
         const connected = snapshot.val() === true;
@@ -359,53 +452,41 @@ if(db){
         }
     });
 
-    // Daily Questions Listener (Optimized Performance)
+    // Firebase se live questions lena aur localStorage mein save karna
     db.ref("daily_questions").on("value", snapshot => {
-        const data = snapshot.val() || {};
-        const box = document.getElementById("questions");
-        let htmlContent = "";
-        let count = 0;
-
-        for(let i = 1; i <= 5; i++){
-            const val = data["q" + i];
-            if(val !== undefined && val !== null && String(val).trim() !== ""){
-                count++;
-            }
-            htmlContent += `
-                <div class="question">
-                    <span class="question-number">SAWAL ${i}</span>
-                    <div class="question-text">${val ? escapeHTML(val) : "---"}</div>
-                </div>
-            `;
+        const data = snapshot.val();
+        if(data){
+            localStorage.setItem("cached_questions", JSON.stringify(data));
+            renderQuestions(data);
         }
-        box.innerHTML = htmlContent;
-        document.getElementById("questionCount").textContent = count + "/5";
     }, error => {
-        document.getElementById("questions").innerHTML = `<div class="empty">❌ Questions load nahi ho sakay.</div>`;
+        const cached = localStorage.getItem("cached_questions");
+        if(cached){
+            renderQuestions(JSON.parse(cached));
+        } else {
+            document.getElementById("questions").innerHTML = `<div class="empty">❌ Questions load nahi ho sakay.</div>`;
+        }
         showError("Questions Error: " + error.message);
     });
 
-    // Announcement Listener
+    // Firebase se live announcement lena aur localStorage mein save karna
     db.ref("admin_announcement").on("value", snapshot => {
         const data = snapshot.val();
-        const announcement = document.getElementById("announcement");
-        const updateTime = document.getElementById("updateTime");
-
-        if(!data){
-            announcement.innerHTML = `<div class="announcement-icon">📢</div>abhi koi announcement nahi hai.`;
-            updateTime.textContent = "Last Updated: —";
-            return;
+        if(data){
+            localStorage.setItem("cached_announcement", JSON.stringify(data));
+            renderAnnouncement(data);
         }
-
-        announcement.innerHTML = `<div class="announcement-icon">📢</div>${escapeHTML(data.text || "—")}`;
-        updateTime.textContent = data.time ? "🕒 Last Updated: " + escapeHTML(data.time) : "🕒 Last Updated: Just now";
     }, error => {
-        announcement.innerHTML = `<div class="announcement-icon">⚠️</div>Announcement load nahi ho saki.`;
+        const cached = localStorage.getItem("cached_announcement");
+        if(cached){
+            renderAnnouncement(JSON.parse(cached));
+        } else {
+            document.getElementById("announcement").innerHTML = `<div class="announcement-icon">⚠️</div>Announcement load nahi ho saki.`;
+        }
         showError("Announcement Error: " + error.message);
     });
 }
 
-// Fast Loader Remover (Max 1.5 seconds for instant feel)
 window.addEventListener("load", () => {
     setTimeout(() => {
         const loader = document.getElementById("loader");
@@ -421,4 +502,4 @@ function refreshPage(){
 }
 </script>
 </body>
-</html>
+                               </html>
